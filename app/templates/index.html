@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title%}
+
+{% block content %}
+<div class="container">
+    <h1>Address List</h1>
+    <table class="table table-success table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for i in lst %}
+          <tr>
+            <td> {{ i['name'] }} </td>    
+            <td> {{ i['phone'] }} </td>    
+            <td> {{ i['address'] }} </td>    
+          </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+
+
+
+
+{% endblock content %}
