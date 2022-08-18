@@ -19,9 +19,18 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
               </li>
+              {% if current_user.authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('addressregister') }}">Address Registry</a>
               </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('signup') }}">Sign Up</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+              </li>
+              {% endif %}
             </ul>
             <span class="navbar-text">
               Navbar text with an inline element

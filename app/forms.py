@@ -1,11 +1,22 @@
-from cmath import phase
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField,SubmitField,PasswordField
+from wtforms.validators import InputRequired, EqualTo
 
 
 class AddressRegister(FlaskForm):
-    name = StringField('Name', validators=[DataRequired()])
-    phone = StringField('Phone', validators=[DataRequired()])
-    address = StringField('Address', validators=[DataRequired()])
+    name = StringField('Name', validators=[InputRequired()])
+    phone = StringField('Phone', validators=[InputRequired()])
+    address = StringField('Address', validators=[InputRequired()])
+    submit = SubmitField()
+
+class User(FlaskForm):
+    email = StringField('Email', validators=[InputRequired()])
+    username = StringField('Username', validators=[InputRequired()])
+    password = PasswordField('Password', validators=[InputRequired()])
+    confirm_password = PasswordField('Confirm Password', validators=[InputRequired(), EqualTo('password')])
+    submit = SubmitField()
+
+class Login(FlaskForm):
+    username = StringField('Username', validators=[InputRequired()])
+    password = StringField('Passowrd', validators=[InputRequired()])
     submit = SubmitField()
