@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template,url_for,redirect,flash
-from app.forms import AddressRegister, User, Login
+from app.forms import AddressRegister, UserRegister, Login
 from app.models import Address, User
 
 @app.route('/')
@@ -21,17 +21,18 @@ def addressregister():
         phone = form.phone.data
         address = form.address.data
         Address(name=name, phone=phone, address=address)
+        flash("The new address has been added","success")
         return redirect(url_for('index'))
     return render_template('addressregister.html', form=form)
 
 @app.route('/signup', methods=["GET","POST"])
 def signup():
-    form = User()
+    form = UserRegister()
     if form.validate_on_submit():
         username = form.username.data
         email = form.email.data
         password = form.password.data
-        existing_user = User.query.filter((User.username == username) | (User.email == email)).First()
+        existing_user = User.query.filter((User.username == username) | (User.email == email)).first()
         if existing_user:
             flash("User or Email is Token !!","danger")
             return redirect(url_for('signup'))

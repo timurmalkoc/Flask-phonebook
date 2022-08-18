@@ -9,7 +9,7 @@ class AddressRegister(FlaskForm):
     address = StringField('Address', validators=[InputRequired()])
     submit = SubmitField()
 
-class User(FlaskForm):
+class UserRegister(FlaskForm):
     email = StringField('Email', validators=[InputRequired()])
     username = StringField('Username', validators=[InputRequired()])
     password = PasswordField('Password', validators=[InputRequired()])
