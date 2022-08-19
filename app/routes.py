@@ -2,6 +2,7 @@ from app import app
 from flask import render_template,url_for,redirect,flash
 from app.forms import AddressRegister, UserRegister, Login
 from app.models import Address, User
+from flask_login import login_user, logout_user, login_required, current_user
 
 @app.route('/')
 def index():
@@ -14,13 +15,14 @@ def index():
 
 
 @app.route('/addressregister', methods=["GET","POST"])
+@login_required
 def addressregister():
     form = AddressRegister()
     if form.validate_on_submit():
         name = form.name.data
         phone = form.phone.data
         address = form.address.data
-        Address(name=name, phone=phone, address=address)
+        Address(name=name, phone=phone, address=address, user_id=current_user.id)
         flash("The new address has been added","success")
         return redirect(url_for('index'))
     return render_template('addressregister.html', form=form)
@@ -42,12 +44,27 @@ def signup():
     return render_template('signup.html', form=form)
 
 
-@app.route('/login')
+@app.route('/login', methods=["GET","POST"])
 def login():
     form = Login()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
-    
+        user = User.query.filter_by(username=username).first()
+        if user is not None:
+            if user.check_password(password):
+                login_user(user)
+                flash(f'{user.username} logged in successfully','success')
+                return redirect(url_for('index'))
+            else:
+                flash("Incorrect password !","danger")
+        else:
+            flash("Incorrect Username","danger")
     return render_template('login.html', form=form)
 
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("Logedout scuccessfully","info")
+    return redirect(url_for('index'))

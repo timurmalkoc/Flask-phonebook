@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Columbus Granit</a>
+          <a class="navbar-brand" href="#">Address Book</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -19,9 +19,12 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="{{ url_for('index') }}">Home</a>
               </li>
-              {% if current_user.authenticated %}
+              {% if current_user.is_authenticated %}
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('addressregister') }}">Address Registry</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
               </li>
               {% else %}
               <li class="nav-item">
@@ -33,7 +36,9 @@
               {% endif %}
             </ul>
             <span class="navbar-text">
-              Navbar text with an inline element
+              {% if current_user.is_authenticated %}
+              {{ current_user.username }}
+              {% endif %}
             </span>
           </div>
         </div>
@@ -42,6 +47,7 @@
 
 
     <div class="container">
+      {% include 'alert.html' %}
         {% block content %}{% endblock content %}
     </div>
 
