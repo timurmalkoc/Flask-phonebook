@@ -13,7 +13,7 @@ class Address(db.Model):
         db.session.commit()
     id = db.Column(db.Integer, primary_key = True)
     name = db.Column(db.String(50), nullable = False)
-    phone = db.Column(db.String(15), nullable = False)
+    phone = db.Column(db.String(15), nullable = False, unique = True )
     street = db.Column(db.String(255), nullable = False)
     city = db.Column(db.String(50), nullable = False)
     state = db.Column(db.String(20), nullable = False)
@@ -24,8 +24,8 @@ class Address(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def update(self, **kwargs):
-        for key, value in kwargs.items:
-            if key in {'name','phone','address'}:
+        for key, value in kwargs.items():
+            if key in {'name','phone','street','city','state','zipcode','county','address_type','user_id'}:
                 setattr(self, key, value)
         db.session.commit()
 

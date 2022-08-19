@@ -4,26 +4,62 @@
 
 {% block content %}
 <div class="container">
-    <h1>Address List</h1>
+  {% if current_user.is_authenticated %}
+    <h1>Address Book</h1>
     <table class="table table-success table-striped">
         <thead>
           <tr>
             <th scope="col">Name</th>
             <th scope="col">Phone</th>
-            <th scope="col">Address</th>
+            <th scope="col">Street</th>
+            <th scope="col">City</th>
+            <th scope="col">State</th>
+            <th scope="col">Zipcode</th>
+            <th scope="col">County</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
-        {% for i in lst %}
+        {% for address in addresses %}
           <tr>
-            <td> {{ i['name'] }} </td>    
-            <td> {{ i['phone'] }} </td>    
-            <td> {{ i['address'] }} </td>    
+            <td> {{ address['name'] }} </td>    
+            <td> {{ address['phone'] }} </td>    
+            <td> {{ address['street'] }} </td> 
+            <td> {{ address['city'] }} </td>  
+            <td> {{ address['state'] }} </td>  
+            <td> {{ address['zipcode'] }} </td>  
+            <td> {{ address['county'] }} </td>
+             <td><div class="d-flex justify-content-between"><a href="{{ url_for('editaddress', address_id=address.id) }}" class="btn btn-success d-grid gap-1 col-5 mx-auto">Edit</a>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-danger d-grid gap-1 col-5 mx-auto" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Modal title</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                        Are you sure to delete
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="{{ url_for('deleteaddress', address_id=address.id) }}" class="btn btn-danger">Delete</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+              </td>
           </tr>
         {% endfor %}
         </tbody>
     </table>
+    {% else %}
 
+    <h1>Please Login to see your Address Book</h1>
+    {% endif %}
 </div>
 
 

@@ -6,7 +6,8 @@ from wtforms.validators import InputRequired, EqualTo
 class AddressRegister(FlaskForm):
     name = StringField('Name', validators=[InputRequired()])
     phone = StringField('Phone', validators=[InputRequired()])
-    address = StringField('Address', validators=[InputRequired()])
+    street = StringField('Address', validators=[InputRequired()])
+    zipcode = StringField('Zipcode', validators=[InputRequired()])
     submit = SubmitField()
 
 class UserRegister(FlaskForm):

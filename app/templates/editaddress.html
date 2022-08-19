@@ -3,23 +3,23 @@
 {% block title %}Sing UP{% endblock title %}
 
 {% block content %}
-<h1 class="text-center">Add New Address</h1>
+<h1 class="text-center">Edit Address</h1>
 
 
 <form method="post">
     {{ form.csrf_token }}
     <div class="formgroup">
         {{ form.name.label }}
-        {{ form.name(class='form-control', placeholder='Enter Name')}}
+        {{ form.name(class='form-control', value=address.name)}}
 
         {{ form.phone.label }}
-        {{ form.phone(class='form-control', placeholder='Enter Phone') }}
+        {{ form.phone(class='form-control', value=address.phone)}}
 
         {{ form.street.label }}
-        {{ form.street(class='form-control', placeholder='Enter Street Address') }}
+        {{ form.street(class='form-control', value=address.street) }}
 
         {{ form.zipcode.label }}
-        {{ form.zipcode(class='form-control', placeholder='Enter Zipcode') }}
+        {{ form.zipcode(class='form-control', value=address.zipcode) }}
 
         {{ form.submit(class='btn btn-primary w-100 mt-3') }}
     </div>
