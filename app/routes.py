@@ -11,7 +11,7 @@ def index():
     if current_user.is_authenticated:
         addresses = Address.query.filter_by(user_id=current_user.id)
         return render_template('index.html', addresses=addresses)
-    return render_template('index.html')
+    return redirect(url_for('login'))
 
 @app.route('/addressregister', methods=["GET","POST"])
 @login_required

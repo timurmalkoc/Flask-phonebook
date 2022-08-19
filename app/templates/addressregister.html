@@ -1,29 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}Sing UP{% endblock title %}
+{% block title %}Add New Address{% endblock title %}
 
 {% block content %}
-<h1 class="text-center">Add New Address</h1>
+<div class="border bg-light p-5 mt-3 bg-opacity-10 border-2 rounded-3 ">
+    <h1 class="font-monospace mb-5">Add New Address</h1> 
+
+    <form method="post" class="row g-3">
+        {{ form.csrf_token }}
+        <div class="col-md-6 mb-3">
+            <label for="inputname" class="form-label">{{ form.name.label }}</label>
+            {{ form.name(class='form-control', placeholder='Enter Name')}}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="inputname" class="form-label">{{ form.phone.label }}</label>
+            {{ form.phone(class='form-control', placeholder='Enter Phone') }}
+        </div>
+        <div class="col-md-10 mb-3">
+            <label for="inputname" class="form-label">{{ form.street.label }}</label>
+            {{ form.street(class='form-control', placeholder='Enter Street Address') }}
+        </div>
+        <div class="col-md-2 mb-3">
+            <label for="inputname" class="form-label">{{ form.zipcode.label }}</label>
+            {{ form.zipcode(class='form-control', placeholder='Enter Zipcode') }}
+        </div>
+        <div class="col-md-5 mb-3">
+            <button type="submit" name="submit" class="btn btn-primary">Add</button>
+        </div>
+    </form>
+</div>
 
 
-<form method="post">
-    {{ form.csrf_token }}
-    <div class="formgroup">
-        {{ form.name.label }}
-        {{ form.name(class='form-control', placeholder='Enter Name')}}
-
-        {{ form.phone.label }}
-        {{ form.phone(class='form-control', placeholder='Enter Phone') }}
-
-        {{ form.street.label }}
-        {{ form.street(class='form-control', placeholder='Enter Street Address') }}
-
-        {{ form.zipcode.label }}
-        {{ form.zipcode(class='form-control', placeholder='Enter Zipcode') }}
-
-        {{ form.submit(class='btn btn-primary w-100 mt-3') }}
-    </div>
-
-</form>
 
 {% endblock content %}

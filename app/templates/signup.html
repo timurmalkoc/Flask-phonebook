@@ -3,27 +3,31 @@
 {% block title %}Sing UP{% endblock title %}
 
 {% block content %}
-<h1 class="text-center">Sing Up Here</h1>
+<div class="border bg-light p-5 mt-3 bg-opacity-10 border-2 rounded-3 ">
+    <h1 class="font-monospace mb-5">Sign UP Here</h1> 
 
-
-<form method="post">
+    <form method="post" class="row g-3">
     {{ form.csrf_token }}
-    <div class="formgroup">
-        {{ form.email.label }}
-        {{ form.email(class='form-control', placeholder='Enter Email')}}
-
-        {{ form.username.label }}
-        {{ form.username(class='form-control', placeholder='Enter Username') }}
-
-        {{ form.password.label }}
-        {{ form.password(class='form-control', placeholder='Enter Password') }}
-
-        {{ form.confirm_password.label }}
-        {{ form.confirm_password(class='form-control', placeholder='Confirm Password') }}
-
-        {{ form.submit(class='btn btn-primary w-100 mt-3') }}
-    </div>
-
-</form>
+        <div class="col-md-6 mb-3">
+            <label for="inputemail" class="form-label">{{ form.email.label }}</label>
+            {{ form.email(type="email", class='form-control', placeholder='Enter Email')}}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="inputname" class="form-label">{{ form.username.label }}</label>
+            {{ form.username(type="text", class='form-control', placeholder='Enter Username') }}
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="inputPassword4" class="form-label">{{ form.password.label }}</label>
+            {{ form.password(type="password", class='form-control', placeholder='Enter Password') }}
+        </div>
+        <div class="col-md-6 mb-3">
+        <label for="inputPassword4" class="form-label">{{ form.confirm_password.label }}</label>
+            {{ form.confirm_password(type="password", class='form-control', placeholder='Confirm Password') }}
+        </div>
+        <div class="col-md-5 mb-3">
+            <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
+</div>
 
 {% endblock content %}
